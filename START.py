@@ -29,17 +29,17 @@ def selID():
 #http://192.168.8.153/selID
 
 def jsonreq(id):
-    url = "https://screens.grafserver.de/wp-json/wp/v2/grafplayers/"
+    url = 
     payload = {}
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
     response = requests.request("GET", url, headers=headers, data=payload)
     y = json.loads(response.text)
     for num in range(len(y)):
         if y[num]['id'] == int(id):
-            rotate = y[num]['bildschirmdrehung']
-            width = y[num]['bildschirmbreite']
-            height = y[num]['bildschirmhoehe']
-            url = y[num]['monitorlink']
+            rotate = y[num]['']
+            width = y[num]['']
+            height = y[num]['']
+            url = y[num]['']
             style = '<iframe src = "{}" style = "transform: rotate({}deg) ; height: {}px ; width: {}px ;" ></iframe>'.format(url, rotate, height, width)
             return style
     else:
