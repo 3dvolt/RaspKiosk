@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+</head>
+<style>.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.centt{
+display: flex;
+  justify-content: center;
+  align-items: center;
+}
+}</style>
+<body style="background-color: #f08218">
+<div class="container center">
+    <form action="/" method="GET">
+        <div>
+			<img style="transform: scale(0.5);"src="{{url_for('static', filename='IMG.png') }}">
+		</div>
+        <div class='row centt'>
+            <div class="col">
+            <h1> ENTER WEBSITE ID </h1>
+            </div>
+        </div>
+        <div class='row centt'>
+            <div class="col">
+                <input style="text-align: center; font-size: 40px; width: 400px; height: 80px" type="number" class="form-control" name="password" id="text-basic">
+                <input type="image" style="width: 100px; height: 100px;" src="{{url_for('static', filename='ARROW.png') }}">
+            </div>
+        </div>
+    </form>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      var socket = io.connect('http://' + document.domain + ':' + location.port);
+      socket.on( 'connect', function() {
+        socket.emit( 'my event', {
+          data: 'User Connected'
+        } )
+
+        var form = $( 'form' ).on( 'submit', function( e ) {
+          e.preventDefault()
+          let user_input = $( 'input.form-control' ).val()
+          socket.emit( 'my event', {
+            message : user_input
+          } )
+          $( 'input.form-control' ).val( '' ).focus()
+        } )
+      } )
+
+      socket.on( 'my response', function( msg ) {
+        console.log( msg )
+      })
+    </script>
+</div>
+</body>
+</html>
